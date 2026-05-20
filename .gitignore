@@ -1,0 +1,13 @@
+# Claude local settings (contains machine-specific permissions, not for sharing)
+.claude/settings.local.json
+
+# Generated outputs — these live in your project, not this repo
+security-reviews/
+detection-rules/cases/
+detection-rules/coverage-report-*.md
+
+# macOS
+.DS_Store
+
+# Node (if running export scripts locally)
+node_modules/
