@@ -1,0 +1,7 @@
+# All agent definitions and commands require review by the repo owner.
+# GitHub will auto-request review on any PR that touches these paths.
+
+.claude/agents/    @Gprad-Work
+.claude/commands/  @Gprad-Work
+docs/              @Gprad-Work
+SECURITY.md        @Gprad-Work
