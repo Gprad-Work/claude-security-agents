@@ -66,14 +66,6 @@ SIEM investigation is systematic: query for events in the timeframe, pivot on ex
 
 ---
 
-## SDD agents
-
-### SDDCreator, PRDReviewer, ERDReviewer — Sonnet
-
-Spec writing and reviewing follows defined templates and checklists. The output structure is known (required sections, required fields, approval checklist). Structured generation and review tasks are Sonnet's strength.
-
----
-
 ## Cost estimate
 
 A full 12-agent security review run (SecurityTriage + 10 domain agents + SecurityLead):

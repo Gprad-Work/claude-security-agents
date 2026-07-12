@@ -44,11 +44,6 @@ Built for use with [Claude Code](https://claude.ai/code). Drop the `.claude/` di
 - `IRSIEMInvestigator` — queries SIEM via MCP, pivots on entities, builds event timeline
 - `IRAnalyst` — produces TP/FP/TNP verdict with MITRE kill chain and containment actions
 
-**SDD (Spec-Driven Development)**
-- `SDDCreator` — produces PRDs, ERDs, RFCs, and Tech Specs following the SDD methodology
-- `PRDReviewer` — reviews PRDs through four lenses: PM, Security, Architecture, SRE
-- `ERDReviewer` — reviews ERDs through four lenses: Architecture, Security, SRE, Cost
-
 ---
 
 ## Setup
