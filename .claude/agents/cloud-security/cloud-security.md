@@ -1,7 +1,7 @@
 ---
 name: CloudSecurity
 description: Domain specialist for cloud security. Reviews AWS, GCP, and Azure misconfigurations — IAM wildcard policies, S3/GCS/Blob ACLs, CloudTrail and audit logging gaps, Lambda/Cloud Function permissions, cross-account trust, cloud storage encryption, secrets manager usage, cloud-native service misconfigs, and cost-security tradeoffs. Distinct from infra-security (which covers network/TLS) and platform-security (which covers K8s/service mesh). Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

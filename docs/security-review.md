@@ -102,6 +102,6 @@ Acceptance criteria: All CRITICAL and HIGH findings resolved and re-reviewed.
 ## Cost
 
 A typical 5-domain spec review (SecurityTriage + 5 domain agents + SecurityLead):
-- ~$1.50–2.00 per run (2 Opus agents + 5 Sonnet agents)
+- ~$1.50–2.00 per run (2 Opus agents — SecurityTriage + SecurityLead — plus 5 Sonnet domain agents; more if AISecurity or RedTeam is among the 5)
 
 See [`docs/model-selection.md`](model-selection.md) for the full breakdown.

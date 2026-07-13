@@ -2,6 +2,8 @@
 
 Why each agent is assigned to Opus or Sonnet.
 
+> **Source of truth:** the `model:` field in each agent's frontmatter under `.claude/agents/` is authoritative — it is what actually runs. This document explains those assignments and is kept in sync with them; if they ever disagree, the frontmatter wins and this doc is the bug. The current split is **6 agents on Opus** (`SecurityLead`, `SecurityTriage`, `AISecurity`, `RedTeam`, `DEReviewRule`, `IRAnalyst`) and everything else on Sonnet.
+
 ---
 
 ## Decision framework
@@ -23,6 +25,10 @@ Three factors drive the choice:
 ### SecurityLead — Opus
 
 SecurityLead does not apply a checklist. It reads an arbitrary artifact, decides which domains are relevant (a judgment call requiring full threat model understanding), dispatches agents, then synthesises findings from multiple domains into a non-duplicated, risk-ranked report with a gate decision. Each step is judgment under uncertainty — Opus's extended reasoning materially reduces dispatch errors and synthesis gaps.
+
+### SecurityTriage — Opus
+
+SecurityTriage performs the same dispatch decision as the Lead's triage mode: read the artifacts, form a threat model, and select which specialists to run. A wrong selection here fails silently — an un-dispatched domain produces no findings, so a whole vulnerability class is simply never examined, and nothing in the pipeline flags the omission. That is the same "wrong dispatch = missed vulnerability class" cost that puts SecurityLead on Opus, so SecurityTriage is on Opus too. (It is the one place this library spends Opus on an agent that produces no findings itself — justified because its output determines whether the expensive-to-miss findings ever get generated.)
 
 ### AISecurity — Opus
 
@@ -76,8 +82,8 @@ A typical security review run dispatches SecurityTriage + a handful of relevant 
 
 | Model | Agents | Approx. cost |
 |---|---|---|
-| Opus | SecurityLead + AISecurity (+ RedTeam when a chaining review is warranted) | ~$0.65 × 2–3 = $1.30–2.00 |
-| Sonnet | ~9 domain agents + SecurityTriage | ~$0.13 × 10 = $1.30 |
-| **Total** | | **~$1.60–3.00 per run** |
+| Opus | SecurityTriage + SecurityLead + AISecurity (+ RedTeam when a chaining review is warranted) | ~$0.65 × 3–4 = $1.95–2.60 |
+| Sonnet | ~8 domain agents | ~$0.13 × 8 = $1.05 |
+| **Total** | | **~$3.00–3.65 per run** |
 
-All-Opus would run ~$7–8 for the same review. The 4× saving compounds across multiple spec versions and review types. The full library is 18 domain agents, but the Lead's job is to dispatch only what adds signal — a run that fires all 18 usually means the triage was too broad, not that the system needed it.
+All-Opus would run ~$7–8 for the same review. The saving still compounds across multiple spec versions and review types. The full library is 18 domain agents, but the Lead's job is to dispatch only what adds signal — a run that fires all 18 usually means the triage was too broad, not that the system needed it.

@@ -100,9 +100,12 @@ See [`docs/incident-response.md`](docs/incident-response.md) for supported SIEMs
 
 ## Model assignments
 
+> **Source of truth:** the `model:` field in each agent's frontmatter is authoritative — it's what actually runs. This table and [`docs/model-selection.md`](docs/model-selection.md) explain those values and are kept in sync with them. The rule: **Opus** where the work is open-ended judgment or adversarial reasoning, or where a wrong call is costly; **Sonnet** for the bounded, checklist-style domains (near-Opus quality on that task at ~5× lower cost).
+
 | Agent | Model | Why |
 |---|---|---|
 | `SecurityLead` | Opus | Meta-reasoning, agent dispatch, synthesis — wrong dispatch = missed vulnerability class |
+| `SecurityTriage` | Opus | Same dispatch judgment as the Lead's triage mode — picking the wrong specialists silently drops a whole vulnerability class |
 | `AISecurity` | Opus | Adversarial imagination — prompt injection requires attacker mindset, not pattern matching |
 | `RedTeam` | Opus | Cross-domain attack-path synthesis — chaining weaknesses into kill chains is adversarial reasoning, not a checklist |
 | All other domain agents | Sonnet | Structured checklist application — bounded answer space, near-Opus quality at 5× lower cost |
@@ -112,6 +115,8 @@ See [`docs/incident-response.md`](docs/incident-response.md) for supported SIEMs
 | `IRAnalyst` | Opus | TP/FP verdict under uncertainty — wrong call means a real attack missed |
 | `IRAlertParser` | Sonnet | Structured extraction — known schema, repeatable |
 | `IRSIEMInvestigator` | Sonnet | SIEM queries and pivots — systematic, not adversarial |
+
+The "all other domain agents" on Sonnet are: `ProductAppSecurity`, `APISecurity`, `GRCSecurity`, `PrivacyEngineering`, `SecOps`, `DevSecOps`, `CloudSecurity`, `InfraSecurity`, `NetworkSecurity`, `PlatformSecurity`, `MobileSecurity`, `ContainerSecurity`, `DataSecurity`, `TPRMSecurity`, `ThreatIntel`, and `FraudAbuse`.
 
 See [`docs/model-selection.md`](docs/model-selection.md) for the full rationale.
 

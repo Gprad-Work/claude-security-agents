@@ -1,7 +1,7 @@
 ---
 name: SecOps
 description: Domain specialist for Security Operations (SecOps). Reviews incident response readiness, logging and observability for security, SIEM coverage, alerting and detection engineering, threat detection, SOC processes, forensic readiness, anomaly detection, and operational security hygiene. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

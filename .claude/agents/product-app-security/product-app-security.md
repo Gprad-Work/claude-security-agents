@@ -1,7 +1,7 @@
 ---
 name: ProductAppSecurity
 description: Domain specialist for product and application security. Reviews OWASP Top 10, authentication and authorization design, IDOR, injection vulnerabilities, XSS/CSRF, API security, session management, business logic vulnerabilities, and input validation. Reviews PRDs, specs, API designs, and code for application-layer security gaps. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

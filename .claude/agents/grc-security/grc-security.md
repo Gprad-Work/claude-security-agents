@@ -1,7 +1,7 @@
 ---
 name: GRCSecurity
 description: Domain specialist for Governance, Risk, and Compliance (GRC) security. Reviews GDPR, SOC2, HIPAA, CCPA, PCI DSS, ISO27001 compliance requirements, data retention and deletion policies, audit trail completeness, privacy-by-design, vendor risk, and regulatory gap analysis. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

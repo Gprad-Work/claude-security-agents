@@ -1,7 +1,7 @@
 ---
 name: PlatformSecurity
 description: Domain specialist for platform security. Reviews IAM, OAuth/OIDC, SSO/SAML, API gateways, Kubernetes RBAC, service mesh, container platform security, cloud platform configuration, identity providers, and service-to-service authentication. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

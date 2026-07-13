@@ -1,7 +1,7 @@
 ---
 name: NetworkSecurity
 description: Domain specialist for network security. Reviews network architecture and segmentation, VPC and subnet design, east-west traffic controls, firewall rule analysis, DNS security, DDoS posture, zero trust network access, VPN and bastion patterns, egress filtering, and inter-service communication trust. Distinct from infra-security (which covers TLS/certs/server hardening) and cloud-security (which covers cloud-native IAM/storage). Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 
