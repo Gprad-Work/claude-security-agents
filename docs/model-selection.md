@@ -34,7 +34,7 @@ RedTeam is not a checklist agent. Its entire value is open-ended adversarial rea
 
 ### All other domain agents — Sonnet
 
-ProductAppSecurity, GRCSecurity, SecOps, DevSecOps, CloudSecurity, InfraSecurity, NetworkSecurity, PlatformSecurity, MobileSecurity, ContainerSecurity, DataSecurity, TPRMSecurity, and ThreatIntel all apply structured domain knowledge against a specific artifact. The task is: read the spec, check each section against a known set of patterns, report findings with specificity. This is structured retrieval and application, not adversarial reasoning. Sonnet matches Opus quality on bounded checklist tasks at ~5× lower cost. (ThreatIntel does prioritization rather than open-ended attack synthesis — its actor-and-TTP mapping is structured against known adversary catalogs, so Sonnet fits.)
+ProductAppSecurity, GRCSecurity, SecOps, DevSecOps, CloudSecurity, InfraSecurity, NetworkSecurity, PlatformSecurity, MobileSecurity, ContainerSecurity, DataSecurity, TPRMSecurity, ThreatIntel, APISecurity, PrivacyEngineering, and FraudAbuse all apply structured domain knowledge against a specific artifact. The task is: read the spec, check each section against a known set of patterns, report findings with specificity. This is structured retrieval and application, not adversarial reasoning. Sonnet matches Opus quality on bounded checklist tasks at ~5× lower cost. (ThreatIntel does prioritization rather than open-ended attack synthesis; APISecurity and PrivacyEngineering apply well-defined catalogs — the OWASP API Top 10 and privacy-by-design principles; and FraudAbuse maps intended functionality to enumerated abuse patterns. All are structured application, so Sonnet fits. FraudAbuse is a borderline call — abuse modeling has an adversarial streak — but its patterns are catalogued enough that Sonnet holds; promote it to Opus if you find it producing generic advice.)
 
 ---
 
@@ -72,7 +72,7 @@ SIEM investigation is systematic: query for events in the timeframe, pivot on ex
 
 ## Cost estimate
 
-A typical security review run dispatches SecurityTriage + a handful of relevant domain agents + SecurityLead (the Lead selects only the domains with real surface — it does not run all 15 every time). A representative run of ~12 agents:
+A typical security review run dispatches SecurityTriage + a handful of relevant domain agents + SecurityLead (the Lead selects only the domains with real surface — it does not run all 18 every time). A representative run of ~12 agents:
 
 | Model | Agents | Approx. cost |
 |---|---|---|
@@ -80,4 +80,4 @@ A typical security review run dispatches SecurityTriage + a handful of relevant 
 | Sonnet | ~9 domain agents + SecurityTriage | ~$0.13 × 10 = $1.30 |
 | **Total** | | **~$1.60–3.00 per run** |
 
-All-Opus would run ~$7–8 for the same review. The 4× saving compounds across multiple spec versions and review types. The full library is 15 domain agents, but the Lead's job is to dispatch only what adds signal — a run that fires all 15 usually means the triage was too broad, not that the system needed it.
+All-Opus would run ~$7–8 for the same review. The 4× saving compounds across multiple spec versions and review types. The full library is 18 domain agents, but the Lead's job is to dispatch only what adds signal — a run that fires all 18 usually means the triage was too broad, not that the system needed it.

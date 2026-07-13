@@ -41,8 +41,11 @@ Your job in Triage mode:
 | `TPRMSecurity` | Third-party SaaS/API integrations, vendor compromise blast radius, OAuth grant scopes, subprocessors, vendor lifecycle, concentration risk |
 | `ThreatIntel` | Named stack components to map to real adversary TTPs, KEV exposure, phishing/impersonation surface, threat-intel operationalization |
 | `RedTeam` | Enough surface and trust boundaries to chain weaknesses into end-to-end attack paths (authorized offensive-perspective review) |
+| `APISecurity` | REST/GraphQL endpoints, object/function-level authz (BOLA/BFLA), API rate limits/quota, SSRF, webhook/callback, API inventory/versioning |
+| `PrivacyEngineering` | Personal data whose privacy-by-design *mechanism* needs review — minimization/consent/erasure enforcement, de-identification, tracking (distinct from GRC's compliance lens) |
+| `FraudAbuse` | User-facing actions, shared/metered resources, payments/promos, content generation, or cost-bearing features that a bad actor could abuse at scale |
 
-Minimum 2 agents. Maximum all 15. Skip any with no artifact surface — and say why.
+Minimum 2 agents. Maximum all 18. Skip any with no artifact surface — and say why.
 
 **Triage output format** (output this exactly, the skill parses it):
 

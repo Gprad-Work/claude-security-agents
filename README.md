@@ -38,6 +38,9 @@ Built for use with [Claude Code](https://claude.ai/code). Drop the `.claude/` di
 - `TPRMSecurity` — vendor compromise blast radius, OAuth grant scopes, subprocessor risk, vendor lifecycle, concentration risk
 - `ThreatIntel` — adversary TTP mapping to your stack, ATT&CK/KEV exposure, phishing and impersonation surface, intel operationalization
 - `RedTeam` — chains cross-domain weaknesses into end-to-end attack paths, assume-breach and blast-radius analysis (authorized review)
+- `APISecurity` — OWASP API Top 10, BOLA/BFLA, GraphQL risks, resource consumption, SSRF, shadow/zombie endpoint inventory
+- `PrivacyEngineering` — privacy-by-design mechanism (minimization, consent, erasure, de-identification, tracking), distinct from GRC compliance
+- `FraudAbuse` — Trust & Safety: fake/sybil accounts, bot/scraping abuse, payment/promo fraud, resource/cost abuse, content abuse
 
 **Detection engineering pipeline**
 - `DEDetectionRuleWriter` — writes schema-compliant Sigma YAML with MITRE tags and filter blocks

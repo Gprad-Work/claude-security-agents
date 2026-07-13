@@ -7,7 +7,7 @@
 
 # Security Review: ClariNote — Clinical Document Summarization (PRD)
 
-> **Reviewed by:** Security Lead (Opus) + AISecurity, ProductAppSecurity, GRCSecurity, SecOps, DevSecOps, CloudSecurity, PlatformSecurity, MobileSecurity, ContainerSecurity, DataSecurity, TPRMSecurity, ThreatIntel, RedTeam
+> **Reviewed by:** Security Lead (Opus) + AISecurity, ProductAppSecurity, APISecurity, GRCSecurity, PrivacyEngineering, SecOps, DevSecOps, CloudSecurity, PlatformSecurity, MobileSecurity, ContainerSecurity, DataSecurity, TPRMSecurity, ThreatIntel, FraudAbuse, RedTeam
 > **Artifact type:** PRD (pre-implementation)
 > **Date:** 2026-07-13
 > **Review method:** SecurityLead triage → parallel domain agent dispatch → Lead synthesis
@@ -58,6 +58,7 @@ No PHI-access alerting, no immutable audit trail, single-region CloudTrail, no e
 | Document → worker RCE → node → all-tenant PHI + backup wipe | AI + Container + Cloud + Platform + Data | SEC-001,3,4,5,7 | No single agent sees the whole chain; the AI injection surface and the container/cloud blast radius are only catastrophic *together* |
 | MFA-less login + sequential IDs + app-only authz | AppSec + SecOps + ThreatIntel | SEC-001, SEC-010 | The highest-likelihood path needs no exploit; absence of detection makes it silent |
 | Public key + over-scoped Drive grant | DevSecOps + TPRM + Platform | SEC-002, SEC-011 | A registry scrape plus a disproportionate OAuth scope escalates "leaked LLM key" into "multi-org Drive breach" |
+| High-value account + no MFA + BOLA + cost-bearing pipeline | FraudAbuse + API + AppSec | SEC-001, SEC-012, SEC-016 | The abuse lens confirms *why* SEC-001/012 are top priority — the account is worth a multi-tenant PHI breach and the LLM pipeline is an unmetered cost — not just that a bug exists |
 
 ### Lead overrides and annotations
 
@@ -93,8 +94,11 @@ No PHI-access alerting, no immutable audit trail, single-region CloudTrail, no e
 | SEC-013 | MEDIUM | Mobile | On-device PHI storage + certificate pinning unspecified | MONITOR (pre-mobile-build) |
 | SEC-014 | MEDIUM | Container, DevSecOps | No admission control / image scanning / SBOM; unpinned base and actions | MONITOR |
 | SEC-015 | LOW | AI | LLM input-size/cost controls | MONITOR |
+| SEC-016 | MEDIUM | FraudAbuse, API, AI | No per-tenant quota / spend-anomaly alerting on the cost-bearing summarization pipeline (LLM cost abuse) | SHOULD FIX |
 
 *Note: MFA (SEC-012) is rated Medium as a standalone control but is a **blocking dependency** of SEC-001's fix — it appears in the pre-implementation actions below.*
+
+**Dedup note (the Lead's job):** APISecurity and PrivacyEngineering each produced strong reports, but most of their findings **merge** rather than add. APISecurity's BOLA finding is SEC-001 seen per-endpoint; its property-level finding is SEC-001/mass-assignment; its resource-consumption finding joins SEC-016. PrivacyEngineering's erasure-mechanism finding merges into SEC-008 (GRC owns the requirement, Privacy owns the mechanism — both fold into one register line), its de-identification finding into SEC-009, its analytics-leak into SEC-006. FraudAbuse's account and access findings reinforce SEC-001/012; only its LLM cost-abuse economics surfaced a genuinely new register item (**SEC-016**). This is the expected outcome of adding more domains: broader confirmation and sharper prioritization, not linear finding growth — the Lead's value is collapsing the overlap.
 
 ---
 
@@ -102,8 +106,11 @@ No PHI-access alerting, no immutable audit trail, single-region CloudTrail, no e
 > Audience: Engineering Manager, Security Lead
 
 Full per-domain findings are in the sibling files in this folder, each mapped to the Risk Register IDs above:
-- [`ai-security.md`](ai-security.md) → SEC-001, SEC-015
+- [`ai-security.md`](ai-security.md) → SEC-001, SEC-015, SEC-016
 - [`product-app-security.md`](product-app-security.md) → SEC-001, SEC-012
+- [`api-security.md`](api-security.md) → SEC-001 (BOLA, merged), SEC-016
+- [`privacy-engineering.md`](privacy-engineering.md) → SEC-006, SEC-008, SEC-009 (all merged — mechanism view)
+- [`fraud-abuse.md`](fraud-abuse.md) → SEC-001, SEC-012, SEC-016
 - [`grc-security.md`](grc-security.md) → SEC-008
 - [`secops.md`](secops.md) → SEC-006, SEC-010
 - [`devsecops.md`](devsecops.md) → SEC-002, SEC-009, SEC-014
@@ -136,7 +143,8 @@ Full per-domain findings are in the sibling files in this folder, each mapped to
 8. **Isolate backups (separate key + account, Object Lock); add hard-delete/erasure path.** Addresses SEC-007, SEC-008.
 9. **Add PHI-access alerting, immutable audit logging, all-region CloudTrail, egress detection.** Addresses SEC-010.
 10. **Drop the Google `drive.readonly` scope; institute vendor onboarding + key offboarding.** Addresses SEC-011.
+11. **Add per-tenant quota + spend-anomaly alerting on the summarization pipeline.** Addresses SEC-016.
 
 **Post-ship (within 30 days):**
-11. **Admission control (PSS `restricted`), image scanning + SBOM, pin base/actions.** Addresses SEC-014.
-12. **Finalize mobile storage/pinning design before the mobile build.** Addresses SEC-013.
+12. **Admission control (PSS `restricted`), image scanning + SBOM, pin base/actions.** Addresses SEC-014.
+13. **Finalize mobile storage/pinning design before the mobile build.** Addresses SEC-013.

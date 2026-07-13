@@ -56,8 +56,11 @@ The triage agent selects from these domains based on what's present in the artif
 | `TPRMSecurity` | Vendor compromise blast radius, OAuth scopes, subprocessor and concentration risk |
 | `ThreatIntel` | Adversary TTP mapping, ATT&CK/KEV exposure, phishing and impersonation surface |
 | `RedTeam` | Cross-domain attack-path chaining, assume-breach and blast-radius analysis (authorized) |
+| `APISecurity` | OWASP API Top 10, BOLA/BFLA, GraphQL, resource consumption, SSRF, endpoint inventory |
+| `PrivacyEngineering` | Privacy-by-design mechanism — minimization, consent, erasure, de-identification, tracking |
+| `FraudAbuse` | Trust & Safety — fake accounts, bot/scraping, payment/promo fraud, resource/cost abuse |
 
-A typical spec review dispatches 4–6 agents. A code review may dispatch all 15.
+A typical spec review dispatches 4–6 agents. A code review may dispatch all 18.
 
 ---
 
