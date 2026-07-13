@@ -10,12 +10,12 @@ Every contribution counts, no matter the size.
 
 ### Add a new security agent
 Know a domain that isn't covered? Write an agent for it. Good candidates:
-- Data security / DLP
-- Container security (beyond what InfraSecurity covers)
-- Threat intelligence
-- Red team / offensive security
+- API security (beyond what ProductAppSecurity covers — schema/contract fuzzing, GraphQL)
+- Hardware / IoT / embedded security
+- Fraud and abuse / trust & safety
+- Privacy engineering (beyond GRC's compliance lens)
 
-Follow the frontmatter format in any existing agent under `.claude/agents/` and open a PR.
+Recently added: `DataSecurity` (DLP), `ContainerSecurity`, `ThreatIntel`, `RedTeam`, and `TPRMSecurity`. Follow the frontmatter format in any existing agent under `.claude/agents/` and open a PR. New domain agents also need wiring into the dispatch tables in `security-lead.md` and `security-triage.md`, plus a worked example under `examples/`.
 
 ### Improve an existing agent
 Found a check that's too generic, missing a key attack pattern, or wrong for a specific stack? Edit the agent and explain what you changed and why in the PR description.
