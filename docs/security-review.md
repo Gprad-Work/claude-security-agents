@@ -51,8 +51,13 @@ The triage agent selects from these domains based on what's present in the artif
 | `NetworkSecurity` | VPC, firewall rules, egress |
 | `PlatformSecurity` | OAuth/OIDC, Kubernetes RBAC, service mesh |
 | `MobileSecurity` | iOS/Android, certificate pinning, deep links |
+| `ContainerSecurity` | Dockerfile/image hygiene, registry, runtime hardening, Pod Security Standards |
+| `DataSecurity` | Data classification, field-level encryption, exfiltration paths, backups |
+| `TPRMSecurity` | Vendor compromise blast radius, OAuth scopes, subprocessor and concentration risk |
+| `ThreatIntel` | Adversary TTP mapping, ATT&CK/KEV exposure, phishing and impersonation surface |
+| `RedTeam` | Cross-domain attack-path chaining, assume-breach and blast-radius analysis (authorized) |
 
-A typical spec review dispatches 4–6 agents. A code review may dispatch all 10.
+A typical spec review dispatches 4–6 agents. A code review may dispatch all 15.
 
 ---
 

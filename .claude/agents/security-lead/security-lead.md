@@ -36,8 +36,13 @@ Your job in Triage mode:
 | `NetworkSecurity` | VPC/subnet design, east-west traffic, security groups, egress filtering, DNS security, DDoS, ZTNA |
 | `PlatformSecurity` | IAM/RBAC, OAuth/OIDC, SSO/SAML, API gateways, Kubernetes, service mesh, container platform, identity providers |
 | `MobileSecurity` | iOS/Android app, React Native, Flutter, certificate pinning, local storage, MDM, deep links, jailbreak detection |
+| `ContainerSecurity` | Dockerfiles, image builds/registries, container runtime hardening, Pod Security Standards, admission control, container escape surface |
+| `DataSecurity` | Data classification, field-level encryption, key management, data-layer access, exfiltration/leakage paths, backups, non-prod data |
+| `TPRMSecurity` | Third-party SaaS/API integrations, vendor compromise blast radius, OAuth grant scopes, subprocessors, vendor lifecycle, concentration risk |
+| `ThreatIntel` | Named stack components to map to real adversary TTPs, KEV exposure, phishing/impersonation surface, threat-intel operationalization |
+| `RedTeam` | Enough surface and trust boundaries to chain weaknesses into end-to-end attack paths (authorized offensive-perspective review) |
 
-Minimum 2 agents. Maximum all 10. Skip any with no artifact surface — and say why.
+Minimum 2 agents. Maximum all 15. Skip any with no artifact surface — and say why.
 
 **Triage output format** (output this exactly, the skill parses it):
 

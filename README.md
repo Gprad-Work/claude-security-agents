@@ -33,6 +33,11 @@ Built for use with [Claude Code](https://claude.ai/code). Drop the `.claude/` di
 - `NetworkSecurity` — VPC design, firewall rules, segmentation, egress filtering
 - `PlatformSecurity` — OAuth/OIDC, Kubernetes RBAC, service mesh, API gateways
 - `MobileSecurity` — iOS/Android, certificate pinning, local storage, deep links
+- `ContainerSecurity` — Dockerfile/image hygiene, registry security, runtime hardening, Pod Security Standards, escape surface
+- `DataSecurity` — data classification, field-level encryption, key management, exfiltration/leakage paths, backups, non-prod data
+- `TPRMSecurity` — vendor compromise blast radius, OAuth grant scopes, subprocessor risk, vendor lifecycle, concentration risk
+- `ThreatIntel` — adversary TTP mapping to your stack, ATT&CK/KEV exposure, phishing and impersonation surface, intel operationalization
+- `RedTeam` — chains cross-domain weaknesses into end-to-end attack paths, assume-breach and blast-radius analysis (authorized review)
 
 **Detection engineering pipeline**
 - `DEDetectionRuleWriter` — writes schema-compliant Sigma YAML with MITRE tags and filter blocks
@@ -96,6 +101,7 @@ See [`docs/incident-response.md`](docs/incident-response.md) for supported SIEMs
 |---|---|---|
 | `SecurityLead` | Opus | Meta-reasoning, agent dispatch, synthesis — wrong dispatch = missed vulnerability class |
 | `AISecurity` | Opus | Adversarial imagination — prompt injection requires attacker mindset, not pattern matching |
+| `RedTeam` | Opus | Cross-domain attack-path synthesis — chaining weaknesses into kill chains is adversarial reasoning, not a checklist |
 | All other domain agents | Sonnet | Structured checklist application — bounded answer space, near-Opus quality at 5× lower cost |
 | `DEReviewRule` | Opus | Operational judgment — only a senior engineer knows if a rule will be tuned out at 3am |
 | `DEDetectionRuleWriter` | Sonnet | Structured Sigma YAML generation — fixed schema, pattern matching |
@@ -105,6 +111,12 @@ See [`docs/incident-response.md`](docs/incident-response.md) for supported SIEMs
 | `IRSIEMInvestigator` | Sonnet | SIEM queries and pivots — systematic, not adversarial |
 
 See [`docs/model-selection.md`](docs/model-selection.md) for the full rationale.
+
+---
+
+## Examples
+
+See [`examples/`](examples/) for live, worked output from **every agent** in this library — all running against one shared sample system (a fictional healthcare SaaS, [`examples/sample-system/PRD.md`](examples/sample-system/PRD.md)) so you can see how the domains overlap, chain, and get synthesised into a final gate decision. Start with [`examples/README.md`](examples/README.md).
 
 ---
 

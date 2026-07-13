@@ -46,6 +46,11 @@ Your output is a structured briefing that an orchestrator will use to dispatch t
 | `NetworkSecurity` | VPC/subnet design, east-west traffic controls, firewall rules, egress filtering, DNS security, DDoS posture, ZTNA |
 | `PlatformSecurity` | IAM/RBAC, OAuth/OIDC, SSO/SAML, API gateways, Kubernetes RBAC, service mesh, container platform config |
 | `MobileSecurity` | iOS/Android apps, React Native/Flutter, certificate pinning, local data storage, MDM, deep links |
+| `ContainerSecurity` | Dockerfiles, image build/registry, container runtime hardening, Pod Security Standards, admission control, escape surface |
+| `DataSecurity` | Data classification, field-level encryption, key management, data-layer access, exfiltration paths, backups, non-prod data copies |
+| `TPRMSecurity` | Third-party SaaS/API integrations, vendor compromise blast radius, OAuth grant scopes, subprocessors, vendor lifecycle, concentration risk |
+| `ThreatIntel` | Named stack components to map to adversary TTPs, KEV-exposed components, phishing/impersonation surface, threat-intel operationalization |
+| `RedTeam` | Enough attack surface and trust boundaries to chain weaknesses into end-to-end attack paths (authorized offensive-perspective review) |
 
 ---
 

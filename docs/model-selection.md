@@ -28,9 +28,13 @@ SecurityLead does not apply a checklist. It reads an arbitrary artifact, decides
 
 Prompt injection is not a checklist vulnerability. The agent must reason about multi-step attack chains, identify indirect injection vectors not visible in the primary code path, and distinguish theoretical from practical risk for the specific architecture under review. Sonnet tends to produce generic warnings ("sanitize user input") rather than specific, contextual attack vectors. For AI security, generic is useless.
 
+### RedTeam — Opus
+
+RedTeam is not a checklist agent. Its entire value is open-ended adversarial reasoning: reading across every domain agent's output and the artifact itself to chain individually-minor weaknesses into end-to-end attack paths that no single-domain reviewer would surface. This is the same class of reasoning as AISecurity and SecurityLead — synthesis and adversarial imagination under uncertainty — and Sonnet tends to re-list single-domain findings rather than construct novel cross-domain chains. Opus earns its cost here.
+
 ### All other domain agents — Sonnet
 
-ProductAppSecurity, GRCSecurity, SecOps, DevSecOps, CloudSecurity, InfraSecurity, NetworkSecurity, PlatformSecurity, MobileSecurity all apply structured domain knowledge against a specific artifact. The task is: read the spec, check each section against a known set of patterns, report findings with specificity. This is structured retrieval and application, not adversarial reasoning. Sonnet matches Opus quality on bounded checklist tasks at ~5× lower cost.
+ProductAppSecurity, GRCSecurity, SecOps, DevSecOps, CloudSecurity, InfraSecurity, NetworkSecurity, PlatformSecurity, MobileSecurity, ContainerSecurity, DataSecurity, TPRMSecurity, and ThreatIntel all apply structured domain knowledge against a specific artifact. The task is: read the spec, check each section against a known set of patterns, report findings with specificity. This is structured retrieval and application, not adversarial reasoning. Sonnet matches Opus quality on bounded checklist tasks at ~5× lower cost. (ThreatIntel does prioritization rather than open-ended attack synthesis — its actor-and-TTP mapping is structured against known adversary catalogs, so Sonnet fits.)
 
 ---
 
@@ -68,12 +72,12 @@ SIEM investigation is systematic: query for events in the timeframe, pivot on ex
 
 ## Cost estimate
 
-A full 12-agent security review run (SecurityTriage + 10 domain agents + SecurityLead):
+A typical security review run dispatches SecurityTriage + a handful of relevant domain agents + SecurityLead (the Lead selects only the domains with real surface — it does not run all 15 every time). A representative run of ~12 agents:
 
 | Model | Agents | Approx. cost |
 |---|---|---|
-| Opus | SecurityLead + AISecurity | ~$0.65 × 2 = $1.30 |
-| Sonnet | 9 domain agents + SecurityTriage | ~$0.13 × 10 = $1.30 |
-| **Total** | | **~$1.60–2.00 per run** |
+| Opus | SecurityLead + AISecurity (+ RedTeam when a chaining review is warranted) | ~$0.65 × 2–3 = $1.30–2.00 |
+| Sonnet | ~9 domain agents + SecurityTriage | ~$0.13 × 10 = $1.30 |
+| **Total** | | **~$1.60–3.00 per run** |
 
-All-Opus would run ~$7–8 for the same review. The 4× saving compounds across multiple spec versions and review types.
+All-Opus would run ~$7–8 for the same review. The 4× saving compounds across multiple spec versions and review types. The full library is 15 domain agents, but the Lead's job is to dispatch only what adds signal — a run that fires all 15 usually means the triage was too broad, not that the system needed it.
