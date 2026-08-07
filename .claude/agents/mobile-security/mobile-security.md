@@ -1,7 +1,7 @@
 ---
 name: MobileSecurity
 description: Domain specialist for mobile security. Reviews iOS and Android application security, React Native / Flutter apps, mobile API surface, certificate pinning, local data storage, permissions, jailbreak/root detection, reverse engineering protection, MDM, and deep link security. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

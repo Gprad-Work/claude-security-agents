@@ -106,6 +106,27 @@ The crown jewels are PHI (patient documents, demographics, clinical summaries) a
   2. Are GitHub Actions pinned to commit SHAs, and are build secrets handled via OIDC or baked in?
   3. Is any SCA/image scanning gating the pipeline?
 
+**APISecurity**
+- Surface area: object-referencing endpoints with sequential IDs, a cost-bearing upload→LLM path, no versioning/inventory.
+- Key questions:
+  1. Is BOLA (object-level authz) enforced per endpoint at the data layer across the whole surface?
+  2. Are cost-bearing endpoints rate-limited and quota'd per tenant?
+  3. Is there an API inventory/versioning story, or shadow/staging endpoints reachable in prod?
+
+**PrivacyEngineering**
+- Surface area: special-category health data → LLM + embeddings, soft-delete-only erasure, prod-cloned staging, analytics URLs.
+- Key questions:
+  1. Does the erasure *mechanism* reach S3, Pinecone, logs, and backups — or only the clinic row?
+  2. Is PHI use limited to the clinical purpose, and are embeddings classified/protected as PHI?
+  3. Is "realistic test data" actually de-identified, or raw production PHI?
+
+**FraudAbuse**
+- Surface area: B2B contracted model (limited consumer-abuse surface), but high-value clinician accounts with no MFA and an unmetered LLM pipeline.
+- Key questions:
+  1. What is a taken-over clinician account worth, and what raises the attacker's cost to obtain one?
+  2. Can an authorized/compromised account run up Anthropic spend via unmetered summarization?
+  3. Is there any velocity/breadth control on abnormal-scale record access?
+
 ### Agents Not Called
 
 | Agent | Reason |

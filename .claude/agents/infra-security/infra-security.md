@@ -1,7 +1,7 @@
 ---
 name: InfraSecurity
 description: Domain specialist for infrastructure security. Reviews network architecture, VPC/subnet design, firewall rules, security groups, TLS and certificate configuration, server hardening, cloud storage ACLs, secrets management at the infra layer, DNS security, and cloud misconfiguration. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

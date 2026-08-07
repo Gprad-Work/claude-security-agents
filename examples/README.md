@@ -10,7 +10,7 @@ Live, worked examples for every agent in this library. Each one runs against a *
 
 - [`sample-system/PRD.md`](sample-system/PRD.md) — the product spec every example reviews. It intentionally contains a spread of realistic security gaps so each domain agent has something genuine to find.
 
-ClariNote lets clinics upload patient documents; an LLM summarizes them into structured clinical notes. It has a clinician web app and a mobile app, runs on EKS, stores PHI in Postgres + S3, and integrates several third-party vendors. That surface exercises all fifteen security-review domains plus the detection-engineering and incident-response pipelines.
+ClariNote lets clinics upload patient documents; an LLM summarizes them into structured clinical notes. It has a clinician web app and a mobile app, runs on EKS, stores PHI in Postgres + S3, and integrates several third-party vendors. That surface exercises all eighteen security-review domains plus the detection-engineering and incident-response pipelines.
 
 ---
 
@@ -33,6 +33,9 @@ Run end-to-end with `/security-review examples/sample-system/PRD.md`.
 | [`security-review/data-security.md`](security-review/data-security.md) | `DataSecurity` | Field-level encryption, PHI in logs, backup blast radius |
 | [`security-review/tprm-security.md`](security-review/tprm-security.md) | `TPRMSecurity` | Vendor compromise blast radius, OAuth grants, subprocessors |
 | [`security-review/threat-intel.md`](security-review/threat-intel.md) | `ThreatIntel` | Healthcare ransomware TTPs, KEV exposure, ATT&CK mapping |
+| [`security-review/api-security.md`](security-review/api-security.md) | `APISecurity` | BOLA/BFLA across the endpoint surface, resource consumption, API inventory |
+| [`security-review/privacy-engineering.md`](security-review/privacy-engineering.md) | `PrivacyEngineering` | Erasure mechanism, purpose limitation, de-identification honesty, tracking |
+| [`security-review/fraud-abuse.md`](security-review/fraud-abuse.md) | `FraudAbuse` | Account-takeover economics, LLM cost abuse — calibrated to a B2B model |
 | [`security-review/red-team.md`](security-review/red-team.md) | `RedTeam` | Chains the above into end-to-end attack paths |
 | [`security-review/99-lead-synthesis.md`](security-review/99-lead-synthesis.md) | `SecurityLead` | The unified, de-duplicated, risk-ranked final report + gate decision |
 

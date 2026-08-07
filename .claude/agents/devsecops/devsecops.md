@@ -1,7 +1,7 @@
 ---
 name: DevSecOps
 description: Domain specialist for DevSecOps security. Reviews CI/CD pipeline security, GitHub Actions / GitLab CI workflows, secrets management in pipelines, dependency security (SCA), SAST/DAST integration, container image scanning, supply chain security (SLSA, SBOM), branch protection, and infrastructure-as-code scanning. Spawned by the security-lead agent or invoked directly.
-model: opus
+model: sonnet
 allowed-tools: Read
 ---
 

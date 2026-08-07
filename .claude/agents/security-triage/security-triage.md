@@ -51,6 +51,9 @@ Your output is a structured briefing that an orchestrator will use to dispatch t
 | `TPRMSecurity` | Third-party SaaS/API integrations, vendor compromise blast radius, OAuth grant scopes, subprocessors, vendor lifecycle, concentration risk |
 | `ThreatIntel` | Named stack components to map to adversary TTPs, KEV-exposed components, phishing/impersonation surface, threat-intel operationalization |
 | `RedTeam` | Enough attack surface and trust boundaries to chain weaknesses into end-to-end attack paths (authorized offensive-perspective review) |
+| `APISecurity` | REST/GraphQL endpoints, object/function-level authz (BOLA/BFLA), API rate limits/quota, SSRF, webhook/callback, API inventory/versioning |
+| `PrivacyEngineering` | Personal data whose privacy *mechanism* needs review — minimization/consent/erasure enforcement, de-identification, tracking (distinct from GRC compliance) |
+| `FraudAbuse` | User-facing actions, shared/metered resources, payments/promos, content generation, or cost-bearing features abusable at scale |
 
 ---
 
