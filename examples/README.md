@@ -61,6 +61,14 @@ Run end-to-end with `/security-review examples/sample-system/PRD.md`.
 
 ---
 
+## Vulnerability-management pipeline
+
+| Example | Agent / command | What it shows |
+|---|---|---|
+| [`vulnerability-management/vuln-triage.md`](vulnerability-management/vuln-triage.md) | `/vuln-triage` → `VMFindingParser` → `VMReachabilityAnalyst` → `VMExploitabilityAnalyst` → `VMRemediationPlanner` | A full SCA triage on the ClariNote dependencies — 6 scanner findings reduced to the 1 that's genuinely exploitable, with an audit trail |
+
+---
+
 ## Regenerating these
 
 These examples were written against the PRD as it stands. If you change `sample-system/PRD.md`, re-run the relevant command to regenerate the affected outputs — e.g. `/security-review examples/sample-system/PRD.md`.

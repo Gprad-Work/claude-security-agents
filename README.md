@@ -17,6 +17,7 @@ Built for use with [Claude Code](https://claude.ai/code). Drop the `.claude/` di
 | `/rule-write <scenario>` | Writes a production-ready Sigma detection rule for a described threat scenario, then runs automated peer review. |
 | `/rule-review <rule-id or path>` | Peer reviews one or more Sigma rules — efficacy scoring, logic analysis, FP coverage, MITRE accuracy. |
 | `/coverage-scan` | Scans the detection rule library against the MITRE ATT&CK framework, surfaces coverage gaps, and recommends the highest-priority missing rules. |
+| `/vuln-triage <scan or CVE>` | Triages dependency (SCA) vulnerabilities on top of your existing scanner — traces reachability and exploitability in your codebase, then produces a prioritized, evidence-backed remediation plan. Cuts scanner noise to the findings that actually matter. |
 
 ### Agents
 
@@ -51,6 +52,12 @@ Built for use with [Claude Code](https://claude.ai/code). Drop the `.claude/` di
 - `IRAlertParser` — parses alert input, extracts entities, scopes investigation timeframe
 - `IRSIEMInvestigator` — queries SIEM via MCP, pivots on entities, builds event timeline
 - `IRAnalyst` — produces TP/FP/TNP verdict with MITRE kill chain and containment actions
+
+**Vulnerability management pipeline**
+- `VMFindingParser` — normalizes scanner output, extracts the vulnerable sink, versions, and exploit preconditions
+- `VMReachabilityAnalyst` — traces call paths to determine whether the vulnerable code is reachable from entry points
+- `VMExploitabilityAnalyst` — tests data flow, configuration, and exposure to prove what's actually exploitable, not just reachable
+- `VMRemediationPlanner` — prioritizes by real exploitability, produces fixes with breaking-change assessment and an audit trail
 
 ---
 
@@ -115,6 +122,10 @@ See [`docs/incident-response.md`](docs/incident-response.md) for supported SIEMs
 | `IRAnalyst` | Opus | TP/FP verdict under uncertainty — wrong call means a real attack missed |
 | `IRAlertParser` | Sonnet | Structured extraction — known schema, repeatable |
 | `IRSIEMInvestigator` | Sonnet | SIEM queries and pivots — systematic, not adversarial |
+| `VMExploitabilityAnalyst` | Opus | Exploitability verdict under uncertainty — a wrong "not exploitable" ships a real vuln; weighs data flow, config, and exposure |
+| `VMFindingParser` | Sonnet | Structured scanner-output extraction — known formats, repeatable |
+| `VMReachabilityAnalyst` | Sonnet | Systematic call-path tracing — mechanical graph walk (promote to Opus for heavily dynamic/reflective codebases) |
+| `VMRemediationPlanner` | Sonnet | Structured prioritization and fix planning against a defined model |
 
 The "all other domain agents" on Sonnet are: `ProductAppSecurity`, `APISecurity`, `GRCSecurity`, `PrivacyEngineering`, `SecOps`, `DevSecOps`, `CloudSecurity`, `InfraSecurity`, `NetworkSecurity`, `PlatformSecurity`, `MobileSecurity`, `ContainerSecurity`, `DataSecurity`, `TPRMSecurity`, `ThreatIntel`, and `FraudAbuse`.
 
@@ -133,6 +144,7 @@ See [`examples/`](examples/) for live, worked output from **every agent** in thi
 - [`docs/security-review.md`](docs/security-review.md) — How `/security-review` works, what artifacts it accepts, example output
 - [`docs/detection-engineering.md`](docs/detection-engineering.md) — The full rule write → validate → review → coverage pipeline
 - [`docs/incident-response.md`](docs/incident-response.md) — How `/triage` works, SIEM MCP setup, example triage output
+- [`docs/vulnerability-management.md`](docs/vulnerability-management.md) — How `/vuln-triage` works — reachability → exploitability → evidence-backed remediation
 - [`docs/model-selection.md`](docs/model-selection.md) — Why each agent is on Opus vs. Sonnet, cost analysis
 
 ---
@@ -143,3 +155,4 @@ See [`examples/`](examples/) for live, worked output from **every agent** in thi
 - Anthropic API access (Claude Sonnet + Opus)
 - For `/triage` with SIEM enrichment: a SIEM with an MCP server (Splunk, Elastic, etc.)
 - For detection engineering: Python 3.x with `detection-rules/validators/` scripts (see [`docs/detection-engineering.md`](docs/detection-engineering.md))
+- For `/vuln-triage`: an existing SCA scanner to produce findings (Snyk, Dependabot, Trivy, Grype, `osv-scanner`, or native `audit`) — the pipeline triages, it does not scan
