@@ -2,7 +2,7 @@
 
 Why each agent is assigned to Opus or Sonnet.
 
-> **Source of truth:** the `model:` field in each agent's frontmatter under `.claude/agents/` is authoritative — it is what actually runs. This document explains those assignments and is kept in sync with them; if they ever disagree, the frontmatter wins and this doc is the bug. The current split is **6 agents on Opus** (`SecurityLead`, `SecurityTriage`, `AISecurity`, `RedTeam`, `DEReviewRule`, `IRAnalyst`) and everything else on Sonnet.
+> **Source of truth:** the `model:` field in each agent's frontmatter under `.claude/agents/` is authoritative — it is what actually runs. This document explains those assignments and is kept in sync with them; if they ever disagree, the frontmatter wins and this doc is the bug. The current split is **7 agents on Opus** (`SecurityLead`, `SecurityTriage`, `AISecurity`, `RedTeam`, `DEReviewRule`, `IRAnalyst`, `VMExploitabilityAnalyst`) and everything else on Sonnet.
 
 ---
 
@@ -73,6 +73,26 @@ Parsing an alert into structured entities (actor, IP, resource, timestamp, inves
 ### IRSIEMInvestigator — Sonnet
 
 SIEM investigation is systematic: query for events in the timeframe, pivot on extracted entities, test each FP condition. The pivot patterns are repeatable. Sonnet at equivalent quality to Opus for the same cost savings.
+
+---
+
+## Vulnerability management agents
+
+### VMExploitabilityAnalyst — Opus
+
+This is the pipeline's decisive judgment call, and the exact analogue of IRAnalyst. Reachability tells you the vulnerable code *can* be called; exploitability requires weighing conflicting evidence across data flow (does attacker input reach the sink in exploitable form?), configuration (are the exploit's preconditions present?), and exposure (can an attacker reach the entry point?) to decide whether the flaw is *real here*. A wrong "not exploitable" ships a live vulnerability; a wrong "exploitable" burns engineering time and erodes trust in the whole triage. That is judgment under uncertainty with an asymmetric, costly error — Opus.
+
+### VMFindingParser — Sonnet
+
+Normalizing scanner output (Snyk/Trivy/Dependabot/OSV/…) into a structured Finding Context is bounded extraction against known formats. The schema is fixed. Sonnet handles it reliably.
+
+### VMReachabilityAnalyst — Sonnet
+
+Tracing imports and call paths to the vulnerable sink is systematic graph-walking — the same "methodical, repeatable pivoting" that puts IRSIEMInvestigator on Sonnet. It is deliberately scoped to *reachability only* (it defers the hard judgment to Phase 3) and flags anything it can't resolve as INDETERMINATE rather than guessing. For heavily dynamic, reflective, or DI-driven codebases where call paths are genuinely hard to establish statically, promote it to Opus — but Sonnet is the right default.
+
+### VMRemediationPlanner — Sonnet
+
+Ranking findings against a defined priority model and producing fix plans with breaking-change assessment is structured application, not open-ended reasoning — the exploitability judgment has already been made in Phase 3. Sonnet fits.
 
 ---
 
