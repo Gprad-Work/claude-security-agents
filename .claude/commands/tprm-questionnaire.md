@@ -6,13 +6,15 @@ You are orchestrating vendor intake. Execute all phases in order. Phase 1 is int
 
 ## Phase 1 — Intake
 
-Ask the user for the following, using AskUserQuestion where the answer is a bounded choice. If `$ARGUMENTS` already answers one of these clearly, confirm it back briefly instead of re-asking.
+Ask the user for the following. If `$ARGUMENTS` already answers one of these clearly, confirm it back briefly instead of re-asking.
+
+The `AskUserQuestion` tool caps each question at 4 options, so only use it for #5 below (2 options). For #3 and #4, which each have more than 4 possible values, ask as a plain free-text question in your own message — list the example categories in the question text and let the user name whichever apply (comma-separated is fine); do not pass them to `AskUserQuestion`.
 
 1. **Company name** and a one-line description of what they do (free text)
 2. **Purpose / use case** — what will we use them for? (free text)
-3. **Connection/integration type** — API key, OAuth, SSO/SAML, SDK/embedded client, webhook (inbound), file transfer, none/informational only (multiSelect — more than one may apply)
-4. **Data categories shared** — PII, payment data, PHI, credentials/secrets, proprietary/IP, AI prompts/model content, none/metadata-only (multiSelect)
-5. **Criticality** — is this a hard dependency (product breaks without it) or replaceable/optional?
+3. **Connection/integration type** — ask in plain text, offering these as examples: API key, OAuth, SSO/SAML, SDK/embedded client, webhook (inbound), file transfer, none/informational only. More than one may apply.
+4. **Data categories shared** — ask in plain text, offering these as examples: PII, payment data, PHI, credentials/secrets, proprietary/IP, AI prompts/model content, none/metadata-only. More than one may apply.
+5. **Criticality** — use `AskUserQuestion` with exactly 2 options: hard dependency (product breaks without it) vs. replaceable/optional.
 
 Do not proceed to Phase 2 until you have all five.
 

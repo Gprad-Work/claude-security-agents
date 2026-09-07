@@ -5,6 +5,7 @@
 security-reviews/
 detection-rules/cases/
 detection-rules/coverage-report-*.md
+tprm/
 
 # macOS
 .DS_Store

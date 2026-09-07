@@ -1,4 +1,4 @@
-Run a full multi-agent security review on the docs or artifact(s) at: $ARGUMENTS
+xRun a full multi-agent security review on the docs or artifact(s) at: $ARGUMENTS
 
 You are orchestrating a real security review. Follow these four phases exactly. Do not collapse or skip any phase.
 
